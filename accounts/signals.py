@@ -13,11 +13,12 @@ def send_telegram_message(message):
             'parse_mode': 'HTML'
         }
         requests.post(url, json=payload)
-    except:
-        pass
+    except Exception as e:
+        print(f"Telegram error: {e}")
 
 @receiver(post_save, sender=User)
 def send_admin_alert_on_signup(sender, instance, created, **kwargs):
     if created:
         message = f"🔔 <b>New User Sign-Up!</b>\n\nUsername: {instance.username}\nEmail: {instance.email or 'Not provided'}"
         send_telegram_message(message)
+        print(f"Signal triggered for {instance.username}")  # Add this line
