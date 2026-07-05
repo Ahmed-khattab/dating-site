@@ -171,4 +171,5 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 LOGIN_URL = 'accounts:login'
 LOGIN_REDIRECT_URL = 'profiles:dashboard'
 LOGOUT_REDIRECT_URL = 'accounts:login'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
+TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
