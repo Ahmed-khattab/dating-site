@@ -1,6 +1,6 @@
 import requests
 from django.db.models.signals import post_save
-from django.contrib.auth.models import User
+from accounts.models import CustomUser
 from django.dispatch import receiver
 from django.conf import settings
 
@@ -16,7 +16,7 @@ def send_telegram_message(message):
     except Exception as e:
         print(f"Telegram error: {e}")
 
-@receiver(post_save, sender=User)
+@receiver(post_save, sender=CustomUser)
 def send_admin_alert_on_signup(sender, instance, created, **kwargs):
     if created:
         message = f"🔔 <b>New User Sign-Up!</b>\n\nUsername: {instance.username}\nEmail: {instance.email or 'Not provided'}"
